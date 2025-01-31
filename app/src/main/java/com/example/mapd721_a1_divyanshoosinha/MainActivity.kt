@@ -96,7 +96,7 @@ fun MainScreen() {
 
             // About Section
             Text(
-                text = "About: Divyanshoo Sinha (Student ID: 721XXXXX)",
+                text = "Divyanshoo Sinha, ID: 301486627",
                 style = MaterialTheme.typography.bodyLarge,
                 modifier = Modifier.align(Alignment.CenterHorizontally)
             )
