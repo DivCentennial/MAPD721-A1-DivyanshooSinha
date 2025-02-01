@@ -41,7 +41,7 @@ fun MainScreen(userStore: UserStore) {
 
     val storedId = userStore.getUserId.collectAsState(initial = "")
     val storedUsername = userStore.getUsername.collectAsState(initial = "")
-    val storedCourseName = userStore.getAccessToken.collectAsState(initial = "")
+    val storedCourseName = userStore.getCourse.collectAsState(initial = "")
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -112,11 +112,25 @@ fun MainScreen(userStore: UserStore) {
                     Button(
                         onClick = {
                             CoroutineScope(Dispatchers.IO).launch {
-                                userStore.saveToken(
-                                    token = courseName,
-                                    username = username,
+                                userStore.saveCourse(
+                                    course = courseName,
+                                    //username = username,
+                                   // studentId = id
+                                )
+
+                                userStore.saveName(
+                                  //  token = courseName,
+                                    username = username
+                                    //studentId = id
+                                )
+
+                                userStore.saveId(
+                                    //  token = courseName,
+                                   // username = username
                                     studentId = id
                                 )
+
+
                             }
                         },
                         colors = ButtonDefaults.buttonColors(
@@ -132,8 +146,12 @@ fun MainScreen(userStore: UserStore) {
                 Button(
                     onClick = {
                         CoroutineScope(Dispatchers.IO).launch {
-                            userStore.saveToken("", "", "")
+                            userStore.saveCourse("")
+                            userStore.saveName("")
+                            userStore.saveId("")
+
                         }
+
                         id = "627"
                         username = ""
                         courseName = ""

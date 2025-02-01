@@ -11,14 +11,14 @@ import kotlinx.coroutines.flow.map
 
 class UserStore(private val context: Context) {
     companion object {
-        private val Context.dataStore: DataStore<Preferences> by preferencesDataStore("userToken")
-        private val USER_TOKEN_KEY = stringPreferencesKey("user_token")
+        private val Context.dataStore: DataStore<Preferences> by preferencesDataStore("userData")
+        private val USER_COURSE_KEY = stringPreferencesKey("user_course")
         private val USER_NAME_KEY = stringPreferencesKey("user_name")
         private val USER_ID_KEY = stringPreferencesKey("user_id")
     }
 
-    val getAccessToken: Flow<String> = context.dataStore.data.map { preferences ->
-        preferences[USER_TOKEN_KEY] ?: ""
+    val getCourse: Flow<String> = context.dataStore.data.map { preferences ->
+        preferences[USER_COURSE_KEY] ?: ""
     }
 
     val getUsername: Flow<String> = context.dataStore.data.map { preferences ->
@@ -30,35 +30,28 @@ class UserStore(private val context: Context) {
     }
 
 
-//    suspend fun saveToken(token: String, username: String, studentId: String) {    //
-//        context.dataStore.edit { preferences ->
-//            preferences[USER_TOKEN_KEY] = token
-//            preferences[USER_NAME_KEY] = username
-//            preferences[USER_ID_KEY] = studentId
-//        }
-//    }
 
 
-    suspend fun saveToken(token: String, username: String, studentId: String) {    //
+
+    suspend fun saveCourse(course: String) {    //  Token
         context.dataStore.edit { preferences ->
-            preferences[USER_TOKEN_KEY] = token
-            preferences[USER_NAME_KEY] = username
-            preferences[USER_ID_KEY] = studentId
+            preferences[USER_COURSE_KEY] = course
+
         }
     }
 
-    suspend fun saveUsername(token: String, username: String, studentId: String) {
+    suspend fun saveName(username: String) {    //   Name
         context.dataStore.edit { preferences ->
-            preferences[USER_TOKEN_KEY] = token
+
             preferences[USER_NAME_KEY] = username
-            preferences[USER_ID_KEY] = studentId
+
         }
     }
 
-    suspend fun saveStudentID(token: String, username: String, studentId: String) {
+    suspend fun saveId(studentId: String) {    //  ID
         context.dataStore.edit { preferences ->
-            preferences[USER_TOKEN_KEY] = token
-            preferences[USER_NAME_KEY] = username
+           // preferences[USER_TOKEN_KEY] = token
+           // preferences[USER_NAME_KEY] = username
             preferences[USER_ID_KEY] = studentId
         }
     }
